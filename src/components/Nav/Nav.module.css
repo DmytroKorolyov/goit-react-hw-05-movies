@@ -1,0 +1,18 @@
+.navList {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+
+    li {
+        a {
+            color: green;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: red;
+            }
+
+        }
+    }
+}
