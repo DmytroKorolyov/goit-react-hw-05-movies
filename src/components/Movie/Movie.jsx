@@ -1,29 +1,13 @@
 import React, { useRef, } from "react";
-import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { fetchMovieById } from "../../api";
 import { useHttp } from "../../hooks/useHttp";
 
 const Movie = () => {
   const { id } = useParams();
-//   const [movie, setMovie] = useState(null);
-//   const [error, setError] = useState(null);
-
-//     console.log(id);
-    
-//   useEffect(() => {
-//     fetchMovieById(id)
-//       .then((data) => {
-//         console.log("Movie data:", data); // Вивести дані про фільм у консоль
-//         setMovie(data);
-//       })
-//       .catch((err) => setError(err.message));
-  //   }, [id]);
-  
-  const navigate = useNavigate()
   const location = useLocation()
   const goBackRef = useRef(location.state?.from || '/')
-
-    const [movie] = useHttp(fetchMovieById, id)
+  const [movie] = useHttp(fetchMovieById, id)
     
   if (!movie) {
     return <h1>Loading...</h1>;
@@ -70,61 +54,3 @@ export default Movie;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// плюс-минус норм(последний перед чатом джипити)
-
-
-// import { fetchMovieById } from "../../api";
-// import React, { useEffect, useState } from "react";
-// import { useParams } from 'react-router-dom'
-
-
-
-
-
-
-// const Movie = () => {
-//     const { id } = useParams()
-//     const [movie, setMovie] = useState(null)
-//     const [error, setError] = useState(null)
-//     useEffect(() => {
-//         fetchMovieById(id)
-//             .then(data => setMovie(data))
-//             .catch(err => setError(err.message))
-//     }, [id])
-
-//     if (!movie) {
-// 		return <h1>Loading...</h1>
-// 	}
-
-
-//     return (
-//         <div> Movie #{id}
-//             <img src={movie.backdrop_path} alt="" />
-//             <h2>{movie.title}</h2>
-//             <p>User score: </p>
-//             <h3>Overview</h3>
-//             <p>{movie.overview}</p>
-//             <h3>Genres</h3>
-//             <p>{movie.genres.name}</p>
-//             </div>
-        
-//     )
-// }
-
-// export default Movie

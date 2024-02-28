@@ -10,13 +10,11 @@ const Movies = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const query = searchParams.get('query') || ''
     const location = useLocation();
-
     const queryParams = useMemo(() => {
     return { query };
   }, [query]);
   const [movies] = useHttp(fetchMoviesByQuery, queryParams);
-    
-    
+        
     return (
         
         <div>
