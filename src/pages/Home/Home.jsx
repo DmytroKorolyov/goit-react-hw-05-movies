@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchMovies } from '../../api';
 import { useHttp } from '../../hooks/useHttp';
 
@@ -13,7 +13,8 @@ const Home = () => {
 //       .catch(err => setError(err.message));
 //   }, []);
 
-    const [movies, setMovies] = useHttp(fetchMovies);
+  const [movies] = useHttp(fetchMovies);
+  const location = useLocation()
     
   return (
     <div>
@@ -22,7 +23,9 @@ const Home = () => {
         <ul>
           {movies?.map(movie => (
         <li key={movie.id}>
-        <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <Link
+                state={{ from: location }}
+                to={`/movies/${movie.id}`}>{movie.title}</Link>
             </li>
           ))}
         </ul>

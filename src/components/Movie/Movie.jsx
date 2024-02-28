@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import React, { useRef, } from "react";
+import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchMovieById } from "../../api";
 import { useHttp } from "../../hooks/useHttp";
 
@@ -17,7 +17,11 @@ const Movie = () => {
 //         setMovie(data);
 //       })
 //       .catch((err) => setError(err.message));
-//   }, [id]);
+  //   }, [id]);
+  
+  const navigate = useNavigate()
+  const location = useLocation()
+  const goBackRef = useRef(location.state?.from || '/')
 
     const [movie] = useHttp(fetchMovieById, id)
     
@@ -27,7 +31,7 @@ const Movie = () => {
 
   return (
       <div>
-          <Link to='/home'>Go back</Link>
+          <Link to={goBackRef.current}>Go back</Link>
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} width="300"
 />
       <h1>{movie.title}</h1>
